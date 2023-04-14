@@ -2,19 +2,19 @@
 
 pragma solidity >=0.8.2 <0.9.0;
 
-contract userRegister {
+contract UserRegister {
   receive() external payable {}
 
-  struct user {
+  struct User {
     bool exists;
     address userID;
     string userPwd;
     string userKey;
   }
 
-  bool isTransactionComplete;
+  bool public isTransactionComplete;
   address public userAddress;
-  mapping(address => user) users;
+  mapping(address => User) users;
 
   constructor() {
     userAddress = msg.sender;
@@ -37,7 +37,7 @@ contract userRegister {
     string memory userKey
   ) public limitToUser {
     require(users[userID].exists == false);
-    users[userID] = user(true, userID, userPwd, userKey);
+    users[userID] = User(true, userID, userPwd, userKey);
   }
 
   function showUser(
@@ -79,4 +79,6 @@ contract userRegister {
 
   //  }
   //}
+}
+
 }
